@@ -24,6 +24,7 @@ playwright_learning/
 ├── .gitignore                # Optimized version control exclusions
 ├── requirements.txt          # Python project dependencies
 └── README.md                 # Project portfolio documentation
+```
 
 ## ⚙️ Local Installation & Execution
 
@@ -31,11 +32,13 @@ playwright_learning/
 ```bash
 git clone [https://github.com/YOUR_USERNAME/playwright-automation-portfolio.git](https://github.com/iTesterMatty/playwright-automation-portfolio.git)
 cd playwright-automation-portfolio
+```
 
 2. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 playwright install
+```
 
 3. **Run the test suite:**
 ```bash
@@ -43,4 +46,5 @@ playwright install
 python3 -m pytest tests/
 # Run tests in headed UI mode with slow-motion delay
 python3 -m pytest tests/ --headed --slowmo 1000
+```
 
