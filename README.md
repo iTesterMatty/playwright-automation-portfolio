@@ -30,7 +30,7 @@ playwright_learning/
 
 1. **Clone the repository:**
 ```bash
-git clone (https://github.com/iTesterMatty/playwright-automation-portfolio.git)
+git clone https://github.com/iTesterMatty/playwright-automation-portfolio.git
 cd playwright-automation-portfolio
 ```
 
