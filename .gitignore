@@ -1,0 +1,15 @@
+# Python virtual environments
+.venv/
+venv/
+ENV/
+
+# Pytest and testing caches
+.pytest_cache/
+.pytest/
+__pycache__/
+*.pyc
+
+# Playwright specific text/video artifacts
+test-results/
+playwright-report/
+blob-report/
