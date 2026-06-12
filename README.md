@@ -44,7 +44,8 @@ playwright install
 ```bash
 # Run all tests sequentially
 python3 -m pytest tests/
+
 # Run tests in headed UI mode with slow-motion delay
-python3 -m pytest tests/ --headed --slowmo 1000
+python3 -m pytest --headed --slowmo 1000 tests/
 ```
 
