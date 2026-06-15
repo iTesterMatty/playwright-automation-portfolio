@@ -16,3 +16,6 @@ blob-report/
 
 # Environment variables
 .env
+
+# Reports
+reports/
