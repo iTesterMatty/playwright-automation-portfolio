@@ -4,7 +4,10 @@ from playwright.sync_api import Page, expect
 import pytest
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
+from pages.checkout_page import CheckoutPage
+from pages.cart_page import CartPage
 
+# Load the environment variables from the .env file into Python's memory
 load_dotenv()
 # --- FIXTURES ---
 # Runs automatically once before any tests start
@@ -27,8 +30,18 @@ def login_page(page: Page) -> LoginPage:
 
 @pytest.fixture
 def inventory_page(page: Page) -> InventoryPage:
-    """Automatically provides an initialized InventoryPage objects to tests."""
+    """Automatically provides an initialized InventoryPage object to tests."""
     return InventoryPage(page)
+
+@pytest.fixture
+def cart_page(page: Page) -> CartPage:
+    """Automatically provides an initialized CartPage object to tests."""
+    return CartPage(page)
+
+@pytest.fixture
+def checkout_page(page: Page) -> CheckoutPage:
+    """Automatically provides an initialized CheckoutPage object to tests."""
+    return CheckoutPage(page)
 
 # --- TESTS ---
 
@@ -90,3 +103,26 @@ def test_login_missing_username(page: Page, login_page: LoginPage, credentials):
 
     # Assertion 2: We will see an error message containing "Username is required"
     expect(login_page.error_message).to_contain_text("Username is required")
+
+def test_successful_end_to_end_checkout(login_page: LoginPage, inventory_page: InventoryPage, checkout_page: CheckoutPage, cart_page: CartPage, credentials):
+    
+    # Navigate to a page and login
+    login_page.navigate()
+    login_page.login(credentials["username"], credentials["password"])
+
+    # Add the "Sauce Labs Backback" to a cart
+    inventory_page.add_item_to_cart("Sauce Labs Backpack")
+
+    # Open the cart
+    inventory_page.open_cart()
+
+    # Check if the item is in the cart and proceed to checkout
+    expect(cart_page.cart_item_name).to_have_text("Sauce Labs Backpack")
+    cart_page.proceed_to_checkout()
+
+    # Fill in the information and finish the order
+    checkout_page.fill_checkout_info(first_name="John", last_name="Doe", postal_code="12345")
+    checkout_page.finish_checkout()
+
+    # Check if the order was completed succesfully 
+    expect(checkout_page.complete_header).to_have_text("Thank you for your order!")
