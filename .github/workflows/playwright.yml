@@ -42,4 +42,7 @@ jobs:
           env:
             SAUCE_USER: ${{secrets.SAUCE_USER}}
             SAUCE_PASSWORD: ${{secrets.SAUCE_PASSWORD}}
-          run: python -m pytest tests/
+          run: |
+            pwd
+            ls -R
+            python -m pytest
