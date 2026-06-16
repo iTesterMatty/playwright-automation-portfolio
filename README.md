@@ -1,6 +1,6 @@
 # 🎭 Playwright E2E Test Automation Framework
 
-[![Playwright End-to-End Tests](https://github.com/iTesterMatty/playwright-automation-portfolio.git/actions/workflows/playwright.yml/badge.svg)](https://github.com/iTesterMatty/playwright-automation-portfolio.git/actions)
+[![Playwright End-to-End Tests](https://github.com/iTesterMatty/playwright-automation-portfolio/actions/workflows/playwright.yml/badge.svg)](https://github.com/iTesterMatty/playwright-automation-portfolio/actions)
 
 A production-ready Web UI automation framework built with **Python**, **Playwright**, and **Pytest**. This repository demonstrates professional test automation architecture, showcasing scalable design patterns, decoupled configurations, and a cloud-integrated Continuous Integration pipeline.
 
@@ -77,8 +77,8 @@ pip install -r requirements.txt
 playwright install --with-deps
 ```
 
-4. **Environment setup:**
-Create a `.env` filein the project root directory and declare your target runtime application variables.
+4. **Environment setup:**<br>
+Create a `.env` file in the project root directory and declare your target runtime application variables.
 Since **Sauce Demo** uses a public sandbox layout, you can safely leverage the public training credentials below:
 ```plaintext
 SAUCE_USER=standard_user
