@@ -43,7 +43,4 @@ jobs:
             SAUCE_USER: ${{secrets.SAUCE_USER}}
             SAUCE_PASSWORD: ${{secrets.SAUCE_PASSWORD}}
             BASE_URL: "https://www.saucedemo.com/"
-          run: |
-            pwd
-            ls -R
-            python -m pytest
+          run: python -m pytest
