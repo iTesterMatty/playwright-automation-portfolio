@@ -94,3 +94,26 @@ python3 -m pytest tests/
 # Run tests in headed UI mode with slow-motion delay
 python3 -m pytest --headed --slowmo 1000 tests/
 ```
+
+## 🐳 Running Tests via Docker / Podman
+
+If you prefer not to install Python dependencies or browser binaries directly on your host system, you can run the entire test suite inside an isolated Docker container using the pre-configured `Dockerfile`.
+
+### Prerequisites
+* Docker or Podman installed on your system.
+* A `.env` file created in the root directory (see Environment Variables setup above).
+
+### 1. Build the Docker Image
+Run the following command in the project root to build the container image (named `playwright-portfolio`):
+
+```bash
+docker build -t playwright-portfolio .
+```
+
+### Run the Test Suite
+To execute tests, run the container and inject your local `.env` file configuration:
+
+```bash
+docker run --rm --env-file .env playwright-portfolio
+``` 
+

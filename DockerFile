@@ -1,0 +1,17 @@
+# Import official image from Microsoft (it has Python 3 and all browsers installed already)
+FROM mcr.microsoft.com/playwright/python:v1.44.0-jammy
+
+# Setup working directory
+WORKDIR /app
+
+# Copy requirements.txt into a container
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of project into a container
+COPY . .
+
+# Default command to run after container start
+CMD ["python3", "-m", "pytest"]
