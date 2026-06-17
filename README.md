@@ -59,25 +59,25 @@ playwright-automation-portfolio/
 
 ## ⚙️ Local Installation & Execution
 
-1. **Clone the repository:**
+### 1. Clone the repository:
 ```bash
 git clone https://github.com/iTesterMatty/playwright-automation-portfolio.git
 cd playwright-automation-portfolio
 ```
 
-2. **Setup your virtual environment:**
+### 2. Setup your virtual environment:
 ```bash
 pyrhon3 -m venv venv
 source venv/bin/activate
 ```
 
-3. **Install dependencies:**
+### 3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 playwright install --with-deps
 ```
 
-4. **Environment setup:**<br>
+### 4. Environment setup:
 Create a `.env` file in the project root directory and declare your target runtime application variables.
 Since **Sauce Demo** uses a public sandbox layout, you can safely leverage the public training credentials below:
 ```plaintext
@@ -86,7 +86,7 @@ SAUCE_PASSWORD=secret_sauce
 BASE_URL=https://www.saucedemo.com/
 ```
 
-5. **Run the test suite:**
+### 5. Run the test suite:
 ```bash
 # Run all tests sequentially
 python3 -m pytest tests/
@@ -110,7 +110,7 @@ Run the following command in the project root to build the container image (name
 docker build -t playwright-portfolio .
 ```
 
-### Run the Test Suite
+### 2. Run the Test Suite
 To execute tests, run the container and inject your local `.env` file configuration:
 
 ```bash
