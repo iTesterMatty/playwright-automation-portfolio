@@ -43,6 +43,15 @@ def checkout_page(page: Page) -> CheckoutPage:
     """Automatically provides an initialized CheckoutPage object to tests."""
     return CheckoutPage(page)
 
+# --- TESTING DATA ----
+LOGIN_DATA = [
+    ("locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."),
+    ("invalid_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"),
+    ("standard_user", "wrong_password", "Epic sadface: Username and password do not match any user in this service"),
+    ("", "secret_sauce", "Epic sadface: Username is required"),
+    ("standard_user", "", "Epic sadface: Password is required"),
+]
+
 # --- TESTS ---
 
 def test_login_and_shop(page: Page, login_page: LoginPage, inventory_page: InventoryPage, credentials):
@@ -77,32 +86,20 @@ def test_sort_product_by_price(login_page: LoginPage, inventory_page: InventoryP
     # Check if the first item is with the lowest price $7.99
     expect(inventory_page.first_item_name).to_have_text("Sauce Labs Onesie")
 
-def test_login_invalid_password(page: Page, login_page: LoginPage, credentials):
-    
+@pytest.mark.parametrize("username, password, expected_error", LOGIN_DATA)
+def test_negative_login_scenarios(page: Page, login_page: LoginPage, username, password, expected_error):
     # --- ACT ---
-    # Login with correct username but invalid password
+    # Login with wrong credentials
     login_page.navigate()
-    login_page.login(credentials["username"], "wrong_sauce")
+    login_page.login(username, password)
 
     # --- ASSERT ---
     # Assertion 1: We should stay on login page (redirection to anywhere will not happen)
     expect(page).to_have_url("https://www.saucedemo.com/")
 
-    # Assertion 2: We will see an error message containing "Username and password do not match"
-    expect(login_page.error_message).to_contain_text("Username and password do not match")
+    # Assertion 2: We will see an expected error message
+    expect(login_page.error_message).to_have_text(expected_error)
 
-def test_login_missing_username(page: Page, login_page: LoginPage, credentials):
-    # --- ACT ---
-    # Try to login -> leave username blank, use correct password
-    login_page.navigate()
-    login_page.login("", credentials["password"])
-
-    # --- ASSERT ---
-    # Assertion 1: We stay on a login page (no redirection)
-    expect(page).to_have_url("https://www.saucedemo.com/")
-
-    # Assertion 2: We will see an error message containing "Username is required"
-    expect(login_page.error_message).to_contain_text("Username is required")
 
 def test_successful_end_to_end_checkout(login_page: LoginPage, inventory_page: InventoryPage, checkout_page: CheckoutPage, cart_page: CartPage, credentials):
     
