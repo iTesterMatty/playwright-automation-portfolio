@@ -123,3 +123,5 @@ def test_successful_end_to_end_checkout(login_page: LoginPage, inventory_page: I
 
     # Check if the order was completed succesfully 
     expect(checkout_page.complete_header).to_have_text("Thank you for your order!")
+
+
